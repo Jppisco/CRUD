@@ -1,0 +1,52 @@
+<div class="container">
+  <header
+    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+        <use xlink:href="#bootstrap"></use>
+      </svg>
+    </a>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><a href="#" class="nav-link px-2 link-secondary" routerLink="/dashboard">Inicio</a></li>
+      <li><a href="#" class="nav-link px-2 link-dark" routerLink="/list">Lista</a></li>
+      <li><a href="#" class="nav-link px-2 link-dark" routerLink="/login">Login</a></li>
+      <li><a href="#" class="nav-link px-2 link-dark" routerLink="/registrar-usuario">Registrar</a></li>
+      <li><a href="#" class="nav-link px-2 link-dark" routerLink="/recuperar-password">Recuperar</a></li>
+    </ul>
+
+    <div class="col-md-3 text-end">
+      <button type="button" class="btn btn-outline-primary me-2" (click)="logOut()">LogOut</button>
+    </div>
+  </header>
+  <div class="card">
+    <div class="card-body">
+      <span class="h3">Lista Usuarios</span>
+      <button class="btn btn-dark btn-lg" style="float: right;" routerLink="/create">Agregar</button>
+      <h5 *ngIf="empleados.length == 0" style="margin-top: 30px;">No hay datos</h5>
+      <table class="table table-striped mt-5" *ngIf="empleados.length > 0">
+        <thead>
+          <tr>
+            <th>Instancias</th>
+            <th>Usuario</th>
+            <th>Clave</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of empleados">
+            <td>{{usuario.instancia}}</td>
+            <td>{{usuario.usuario}}</td>
+            <td>{{usuario.clave}}</td>
+            <td>
+              <i class="fas fa-edit fa-lg text-info" style="margin-right: 5px;"
+                [routerLink]="['/edit/',usuario.id]"></i>
+              <i (click)="eliminarUsuario(usuario.id)" class="fas fa-trash-alt fa-lg text-danger"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
